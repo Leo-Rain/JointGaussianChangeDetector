@@ -45,4 +45,4 @@ class ChangePointEstimator(ChangeDetector):
         distance_time_series = np.apply_along_axis(partial(distance, mu=mu, precisions=precisions), 1, X)
 
         # return the min distance (max likelihood change point) and array of distances
-        return np.min(distance_time_series, axis=1), distance_time_series
+        return np.argmin(distance_time_series, axis=1), distance_time_series

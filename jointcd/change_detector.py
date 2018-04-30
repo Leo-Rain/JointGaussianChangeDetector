@@ -9,9 +9,6 @@ class ChangeDetector(object):
 
     """
 
-    covariance_estimator_ = None
-
-
     def __init__(self, method='robust', estimator_kw_args={}):
         if method is 'robust':
             self.covariance_estimator_ = MinCovDet(**estimator_kw_args)
@@ -49,4 +46,4 @@ class ChangeDetector(object):
         distances - shape (n_time_series). The mahanobis distances of each time series under the fitted distribution
         """
         distances = self.covariance_estimator_.mahalanobis(X)
-        return (distances > threshold, distances)
+        return distances > threshold, distances
