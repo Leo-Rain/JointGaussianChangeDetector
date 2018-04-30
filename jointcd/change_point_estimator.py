@@ -24,21 +24,21 @@ def distance(x, mu, precisions):
 
 class ChangePointEstimator(ChangeDetector):
 
-	def predict(self, X):
-		"""
-		Returns the most probably change point in each time series.
-		Also returns the time series of mahalanobis distances
+    def predict(self, X):
+        """
+        Returns the most probably change point in each time series.
+        Also returns the time series of mahalanobis distances
 
-		Parameters:
-		-----------
-		X - array of time series, shape (n_series, len_series)
-		"""
-		D,N = X.shape
+        Parameters:
+        -----------
+        X - array of time series, shape (n_series, len_series)
+        """
+        D,N = X.shape
 
-		sigma = self.covariance_estimator_.covariance_
-		mu = self.covariance_estimator_.location_
+        sigma = self.covariance_estimator_.covariance_
+        mu = self.covariance_estimator_.location_
 
-		# calculate the precision matrices for all possible partitions
+        # calculate the precision matrices for all possible partitions
         precisions = [pinvh(partition(sigma, k)) for k in range(N)]
 
         # calculate the mahalanobis distance for each candidate change point in each time series
